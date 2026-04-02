@@ -3,7 +3,7 @@
 set -eu
 
 SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-UUID='test-email-addresses@dmferrari'
+UUID='test-email-addresses@dmferrari.github.io'
 TARGET_DIR="${HOME}/.local/share/gnome-shell/extensions/${UUID}"
 
 cd "${SCRIPT_DIR}"

@@ -43,7 +43,7 @@ git push origin vX.Y.Z
 6. Create the GitHub Release and upload the packaged extension:
 
 ```sh
-gh release create vX.Y.Z dist/test-email-addresses@dmferrari.shell-extension.zip \
+gh release create vX.Y.Z dist/test-email-addresses@dmferrari.github.io.shell-extension.zip \
   --title "vX.Y.Z" \
   --notes "Release notes here."
 ```
@@ -55,12 +55,12 @@ The first public release was created as:
 ```sh
 git tag -s v0.1.0 -m "v0.1.0"
 git push origin v0.1.0
-gh release create v0.1.0 dist/test-email-addresses@dmferrari.shell-extension.zip \
+gh release create v0.1.0 dist/test-email-addresses@dmferrari.github.io.shell-extension.zip \
   --title "v0.1.0" \
   --notes "Initial public release."
 ```
 
 ## Notes
 
-- `./package.sh` always writes the archive to `dist/test-email-addresses@dmferrari.shell-extension.zip`
+- `./package.sh` always writes the archive to `dist/test-email-addresses@dmferrari.github.io.shell-extension.zip`
 - If the release process changes later, update this file first

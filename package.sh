@@ -3,7 +3,7 @@
 set -eu
 
 SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-UUID='test-email-addresses@dmferrari'
+UUID='test-email-addresses@dmferrari.github.io'
 DIST_DIR="${SCRIPT_DIR}/dist"
 BUILD_DIR="${DIST_DIR}/${UUID}"
 ARCHIVE_PATH="${DIST_DIR}/${UUID}.shell-extension.zip"

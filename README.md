@@ -46,20 +46,20 @@ If you prefer using only the keyboard, set a shortcut in Preferences and trigger
 
 ### From GitHub Releases
 
-Download the latest `test-email-addresses@dmferrari.shell-extension.zip` from the
+Download the latest `test-email-addresses@dmferrari.github.io.shell-extension.zip` from the
 [Releases page](https://github.com/dmferrari/email-addresses-generator/releases),
 then install it with:
 
 ```sh
-gnome-extensions install --force test-email-addresses@dmferrari.shell-extension.zip
-gnome-extensions enable test-email-addresses@dmferrari
+gnome-extensions install --force test-email-addresses@dmferrari.github.io.shell-extension.zip
+gnome-extensions enable test-email-addresses@dmferrari.github.io
 ```
 
 If GNOME Shell does not pick up the new version immediately, disable and enable it again:
 
 ```sh
-gnome-extensions disable test-email-addresses@dmferrari
-gnome-extensions enable test-email-addresses@dmferrari
+gnome-extensions disable test-email-addresses@dmferrari.github.io
+gnome-extensions enable test-email-addresses@dmferrari.github.io
 ```
 
 ### From the repository
@@ -70,7 +70,7 @@ For local development or manual installation from the working tree:
 ./dev-reload.sh
 ```
 
-That copies the runtime files into `~/.local/share/gnome-shell/extensions/test-email-addresses@dmferrari/`,
+That copies the runtime files into `~/.local/share/gnome-shell/extensions/test-email-addresses@dmferrari.github.io/`,
 compiles the schema, and reloads the extension.
 
 ## Data and storage
@@ -107,4 +107,4 @@ Build a release zip:
 ./package.sh
 ```
 
-The archive is written to `dist/test-email-addresses@dmferrari.shell-extension.zip`.
+The archive is written to `dist/test-email-addresses@dmferrari.github.io.shell-extension.zip`.
