@@ -1,0 +1,10 @@
+{
+  "uuid": "test-email-addresses@dmferrari",
+  "name": "Test Email Addresses",
+  "description": "Generate and copy unique test email addresses to the clipboard from the top bar.",
+  "shell-version": [
+    "49"
+  ],
+  "url": "https://github.com/dmferrari/email-addresses-generator",
+  "settings-schema": "org.gnome.shell.extensions.test-email-addresses"
+}

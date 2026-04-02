@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.test-email-addresses" path="/org/gnome/shell/extensions/test-email-addresses/">
+    <key name="prefix" type="s">
+      <default>''</default>
+      <summary>Prefix used for generated email addresses</summary>
+    </key>
+    <key name="domain" type="s">
+      <default>''</default>
+      <summary>Domain used for generated email addresses</summary>
+    </key>
+    <key name="generate-shortcut" type="as">
+      <default>[]</default>
+      <summary>Keyboard shortcut used to generate and copy a test address</summary>
+    </key>
+  </schema>
+</schemalist>

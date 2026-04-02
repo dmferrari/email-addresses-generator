@@ -1,0 +1,6 @@
+schemas/gschemas.compiled
+*.zip
+.test-tmp-*/
+used-addresses.json
+dist/
+AGENTS.md
