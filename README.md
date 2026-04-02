@@ -4,6 +4,16 @@ A GNOME Shell extension that generates unique test email addresses from the top 
 
 It is meant for people who repeatedly fill sign-up, checkout, or QA forms and want disposable but traceable email aliases without typing them manually.
 
+## Screenshots
+
+### Panel menu
+
+![Panel menu screenshot](assets/panel-menu-screenshot.png)
+
+### Preferences
+
+![Preferences window screenshot](assets/preferences.png)
+
 Generated addresses use this format:
 
 `<prefix>+test-<8 lowercase letters or numbers>@<domain>`
