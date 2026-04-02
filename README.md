@@ -97,6 +97,8 @@ Reload the extension into your local GNOME Shell user extensions directory:
 ./dev-reload.sh
 ```
 
+Release process documentation is available in [docs/releasing.md](docs/releasing.md).
+
 ## Packaging
 
 Build a release zip:
