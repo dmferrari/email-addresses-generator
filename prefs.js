@@ -102,7 +102,7 @@ export default class TestEmailAddressesPreferences extends ExtensionPreferences 
         });
         const storageRow = new Adw.ActionRow({
             title: 'Used addresses file',
-            subtitle: getStoragePath(),
+            subtitle: getDisplayStoragePath(),
         });
         const openFolderButton = new Gtk.Button({
             label: 'Open folder',
@@ -196,4 +196,14 @@ function getShortcutLabel(settings) {
         return shortcut;
 
     return Gtk.accelerator_get_label(keyval, modifiers);
+}
+
+function getDisplayStoragePath() {
+    const homeDirectory = GLib.get_home_dir();
+    const storagePath = getStoragePath();
+
+    if (storagePath.startsWith(`${homeDirectory}/`))
+        return storagePath.replace(homeDirectory, '~');
+
+    return storagePath;
 }
