@@ -44,9 +44,11 @@ If you prefer using only the keyboard, set a shortcut in Preferences and trigger
 
 ## Installation
 
-### From a packaged archive
+### From GitHub Releases
 
-Build or otherwise obtain `test-email-addresses@dmferrari.shell-extension.zip`, then install it with:
+Download the latest `test-email-addresses@dmferrari.shell-extension.zip` from the
+[Releases page](https://github.com/dmferrari/email-addresses-generator/releases),
+then install it with:
 
 ```sh
 gnome-extensions install --force test-email-addresses@dmferrari.shell-extension.zip
