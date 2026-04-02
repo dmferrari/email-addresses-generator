@@ -16,6 +16,7 @@ import {
 export default class TestEmailAddressesPreferences extends ExtensionPreferences {
     fillPreferencesWindow(window) {
         const settings = this.getSettings();
+        const signalIds = [];
 
         window.set_default_size(640, 480);
         window.search_enabled = true;
@@ -50,8 +51,8 @@ export default class TestEmailAddressesPreferences extends ExtensionPreferences 
             );
         };
 
-        settings.connect('changed::prefix', updatePreview);
-        settings.connect('changed::domain', updatePreview);
+        signalIds.push(settings.connect('changed::prefix', updatePreview));
+        signalIds.push(settings.connect('changed::domain', updatePreview));
 
         updatePreview();
 
@@ -80,7 +81,7 @@ export default class TestEmailAddressesPreferences extends ExtensionPreferences 
             shortcutRow.subtitle = getShortcutLabel(settings);
         };
 
-        settings.connect('changed::generate-shortcut', updateShortcutSubtitle);
+        signalIds.push(settings.connect('changed::generate-shortcut', updateShortcutSubtitle));
 
         changeShortcutButton.connect('clicked', () => {
             this._presentShortcutCapture(window, settings, updateShortcutSubtitle);
@@ -118,6 +119,11 @@ export default class TestEmailAddressesPreferences extends ExtensionPreferences 
         storageRow.add_suffix(openFolderButton);
         storageGroup.add(storageRow);
         page.add(storageGroup);
+
+        window.connect('destroy', () => {
+            for (const signalId of signalIds)
+                settings.disconnect(signalId);
+        });
     }
 
     _presentShortcutCapture(window, settings, updateShortcutSubtitle) {
