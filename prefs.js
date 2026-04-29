@@ -13,12 +13,20 @@ import {
     getStoragePath,
 } from './storage.js';
 
+function getExtensionVersion(extensionDir) {
+    const path = GLib.build_filenamev([extensionDir, 'metadata.json']);
+    const file = Gio.File.new_for_path(path);
+    const [, contents] = file.load_contents(null);
+    const metadata = JSON.parse(new TextDecoder('utf-8').decode(contents));
+    return metadata.version || 'Unknown';
+}
+
 export default class TestEmailAddressesPreferences extends ExtensionPreferences {
     fillPreferencesWindow(window) {
         const settings = this.getSettings();
         const signalIds = [];
 
-        window.set_default_size(640, 600);
+        window.set_default_size(640, 720);
         window.search_enabled = true;
 
         const page = new Adw.PreferencesPage({
@@ -120,13 +128,17 @@ export default class TestEmailAddressesPreferences extends ExtensionPreferences 
         storageGroup.add(storageRow);
         page.add(storageGroup);
 
-        const versionGroup = new Adw.PreferencesGroup();
-        const versionRow = new Adw.ActionRow({
-            title: 'Version',
-            subtitle: this.metadata.version,
+        const footerGroup = new Adw.PreferencesGroup();
+        const version = getExtensionVersion(this.path);
+        const versionLabel = new Gtk.Label({
+            label: `Version ${version}`,
+            margin_top: 16,
+            margin_bottom: 16,
         });
-        versionGroup.add(versionRow);
-        page.add(versionGroup);
+        versionLabel.add_css_class('dim-label');
+        versionLabel.set_halign(Gtk.Align.CENTER);
+        footerGroup.add(versionLabel);
+        page.add(footerGroup);
 
         window.connect('destroy', () => {
             for (const signalId of signalIds)
