@@ -27,21 +27,25 @@ export function ensureStorageDirectory(path = getStoragePath()) {
 export class UsedAddressStore {
     constructor(path = getStoragePath()) {
         this._path = path;
-        this._addresses = this._load();
+        this._addresses = new Set();
+        this._loaded = this._loadAsync();
     }
 
-    add(address) {
+    async add(address) {
+        await this._loaded;
+
         if (this._addresses.has(address))
             return false;
 
         this._addresses.add(address);
-        this._save();
+        await this._saveAsync();
         return true;
     }
 
-    clear() {
+    async clear() {
+        await this._loaded;
         this._addresses.clear();
-        this._save();
+        await this._saveAsync();
     }
 
     has(address) {
@@ -52,27 +56,38 @@ export class UsedAddressStore {
         return this._path;
     }
 
-    _load() {
+    async _loadAsync() {
         const file = Gio.File.new_for_path(this._path);
 
         try {
-            const [, contents] = file.load_contents(null);
+            const [, contents] = await new Promise((resolve, reject) => {
+                file.load_contents_async(null, (_source, result) => {
+                    try {
+                        resolve(file.load_contents_finish(result));
+                    } catch (error) {
+                        reject(error);
+                    }
+                });
+            });
+
             const data = JSON.parse(new TextDecoder('utf-8').decode(contents));
 
-            if (Array.isArray(data))
-                return new Set(data.filter(address => typeof address === 'string'));
-
-            if (Array.isArray(data?.addresses))
-                return new Set(data.addresses.filter(address => typeof address === 'string'));
+            if (Array.isArray(data)) {
+                this._addresses = new Set(
+                    data.filter(address => typeof address === 'string')
+                );
+            } else if (Array.isArray(data?.addresses)) {
+                this._addresses = new Set(
+                    data.addresses.filter(address => typeof address === 'string')
+                );
+            }
         } catch (error) {
             if (!error.matches?.(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND))
                 logError(error, 'Failed to load used addresses');
         }
-
-        return new Set();
     }
 
-    _save() {
+    _saveAsync() {
         ensureStorageDirectory(this._path);
 
         const file = Gio.File.new_for_path(this._path);
@@ -80,12 +95,22 @@ export class UsedAddressStore {
             addresses: [...this._addresses].sort(),
         }, null, 2)}\n`;
 
-        file.replace_contents(
-            new TextEncoder().encode(payload),
-            null,
-            false,
-            Gio.FileCreateFlags.REPLACE_DESTINATION,
-            null
-        );
+        return new Promise((resolve, reject) => {
+            file.replace_contents_bytes_async(
+                new TextEncoder().encode(payload),
+                null,
+                false,
+                Gio.FileCreateFlags.REPLACE_DESTINATION,
+                null,
+                (_source, result) => {
+                    try {
+                        file.replace_contents_finish(result);
+                        resolve();
+                    } catch (error) {
+                        reject(error);
+                    }
+                }
+            );
+        });
     }
 }

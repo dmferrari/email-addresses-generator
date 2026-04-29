@@ -23,7 +23,7 @@ class InMemoryStore {
         this._values = new Set(initialValues);
     }
 
-    add(address) {
+    async add(address) {
         if (this._values.has(address))
             return false;
 
@@ -65,7 +65,7 @@ export default [
     },
     {
         name: 'generator creates a unique address with the expected format',
-        run() {
+        async run() {
             const generator = new EmailAddressGenerator(
                 new FakeSettings({
                     prefix: 'tester',
@@ -74,14 +74,14 @@ export default [
                 new InMemoryStore()
             );
 
-            const email = generator.generate();
+            const email = await generator.generate();
 
             assertMatch(email, /^tester\+test-[a-z0-9]{8}@example\.com$/);
         },
     },
     {
         name: 'generator retries until it finds a unique address',
-        run() {
+        async run() {
             const generator = new EmailAddressGenerator(
                 new FakeSettings({
                     prefix: 'tester',
@@ -101,7 +101,7 @@ export default [
 
             try {
                 assertEqual(
-                    generator.generate(),
+                    await generator.generate(),
                     'tester+test-bbbbbbbb@example.com'
                 );
             } finally {

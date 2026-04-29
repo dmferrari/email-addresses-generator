@@ -45,9 +45,9 @@ class EmailIndicator extends PanelMenu.Button {
         super.destroy();
     }
 
-    generateAndCopy() {
+    async generateAndCopy() {
         try {
-            const email = this._generator.generate();
+            const email = await this._generator.generate();
 
             this._copyToClipboard(email);
             this._prependHistory(email);

@@ -41,7 +41,7 @@ export class EmailAddressGenerator {
         );
     }
 
-    generate() {
+    async generate() {
         const prefix = normalizePrefix(this._settings.get_string('prefix'));
         const domain = normalizeDomain(this._settings.get_string('domain'));
 
@@ -51,7 +51,7 @@ export class EmailAddressGenerator {
         for (let attempt = 0; attempt < 4096; attempt++) {
             const candidate = `${prefix}+${TOKEN_PREFIX}-${randomString(TOKEN_RANDOM_LENGTH)}@${domain}`;
 
-            if (this._store.add(candidate))
+            if (await this._store.add(candidate))
                 return candidate;
         }
 

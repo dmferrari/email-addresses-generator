@@ -15,7 +15,7 @@ let failures = 0;
 for (const [suiteName, tests] of suites) {
     for (const test of tests) {
         try {
-            test.run();
+            await test.run();
             print(`PASS ${suiteName} ${test.name}`);
         } catch (error) {
             failures += 1;

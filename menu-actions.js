@@ -1,4 +1,4 @@
-export function handleGenerateButtonClick(generateAndCopy, closeMenu) {
-    if (generateAndCopy())
+export async function handleGenerateButtonClick(generateAndCopy, closeMenu) {
+    if (await generateAndCopy())
         closeMenu();
 }

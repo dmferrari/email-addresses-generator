@@ -54,17 +54,18 @@ function removeTree(path) {
 export default [
     {
         name: 'store persists added addresses across reloads',
-        run() {
+        async run() {
             const path = createTempPath('used-addresses.json');
             const directory = GLib.path_get_dirname(path);
 
             try {
                 const store = new UsedAddressStore(path);
 
-                assertEqual(store.add('tester+test-abcdefgh@example.com'), true);
-                assertEqual(store.add('tester+test-abcdefgh@example.com'), false);
+                assertEqual(await store.add('tester+test-abcdefgh@example.com'), true);
+                assertEqual(await store.add('tester+test-abcdefgh@example.com'), false);
 
                 const reloadedStore = new UsedAddressStore(path);
+                await reloadedStore._loaded;
 
                 assert(reloadedStore.has('tester+test-abcdefgh@example.com'));
             } finally {
@@ -74,17 +75,18 @@ export default [
     },
     {
         name: 'store clear removes persisted addresses',
-        run() {
+        async run() {
             const path = createTempPath('used-addresses.json');
             const directory = GLib.path_get_dirname(path);
 
             try {
                 const store = new UsedAddressStore(path);
 
-                store.add('tester+test-abcdefgh@example.com');
-                store.clear();
+                await store.add('tester+test-abcdefgh@example.com');
+                await store.clear();
 
                 const reloadedStore = new UsedAddressStore(path);
+                await reloadedStore._loaded;
 
                 assertEqual(reloadedStore.has('tester+test-abcdefgh@example.com'), false);
             } finally {
