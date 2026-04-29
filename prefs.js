@@ -18,7 +18,7 @@ function getExtensionVersion(extensionDir) {
     const file = Gio.File.new_for_path(path);
     const [, contents] = file.load_contents(null);
     const metadata = JSON.parse(new TextDecoder('utf-8').decode(contents));
-    return metadata.version || 'Unknown';
+    return metadata['version-name'] || 'Unknown';
 }
 
 export default class TestEmailAddressesPreferences extends ExtensionPreferences {

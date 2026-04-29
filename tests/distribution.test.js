@@ -42,7 +42,7 @@ export default [
             const file = Gio.File.new_for_path('metadata.json');
             const [, contents] = file.load_contents(null);
             const metadata = JSON.parse(new TextDecoder('utf-8').decode(contents));
-            const version = metadata['version'];
+            const version = metadata['version-name'];
 
             assert(version, 'Version should be defined');
             assertMatch(version, /^\d+\.\d+\.\d+$/, 'Version should follow semver format');
