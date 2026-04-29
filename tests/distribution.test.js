@@ -24,4 +24,16 @@ export default [
             }
         },
     },
+    {
+        name: 'metadata.json supports the expected GNOME versions',
+        run() {
+            const file = Gio.File.new_for_path('metadata.json');
+            const [, contents] = file.load_contents(null);
+            const metadata = JSON.parse(new TextDecoder('utf-8').decode(contents));
+            const versions = metadata['shell-version'];
+
+            assert(versions.includes('49'), 'Should support GNOME 49');
+            assert(versions.includes('50'), 'Should support GNOME 50');
+        },
+    },
 ];

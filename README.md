@@ -4,6 +4,11 @@ A GNOME Shell extension that generates unique test email addresses from the top 
 
 It is meant for people who repeatedly fill sign-up, checkout, or QA forms and want disposable but traceable email aliases without typing them manually.
 
+## Compatibility
+
+- GNOME Shell 49
+- GNOME Shell 50
+
 ## Screenshots
 
 ### Panel menu
