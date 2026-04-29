@@ -121,13 +121,11 @@ export default class TestEmailAddressesPreferences extends ExtensionPreferences 
         page.add(storageGroup);
 
         const versionGroup = new Adw.PreferencesGroup();
-        const versionLabel = new Gtk.Label({
-            label: `version ${this.metadata.version}`,
-            halign: Gtk.Align.CENTER,
-            margin_top: 24,
+        const versionRow = new Adw.ActionRow({
+            title: 'Version',
+            subtitle: this.metadata.version,
         });
-        versionLabel.add_css_class('dim-label');
-        versionGroup.set_header_widget(versionLabel);
+        versionGroup.add(versionRow);
         page.add(versionGroup);
 
         window.connect('destroy', () => {
