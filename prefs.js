@@ -18,7 +18,7 @@ export default class TestEmailAddressesPreferences extends ExtensionPreferences 
         const settings = this.getSettings();
         const signalIds = [];
 
-        window.set_default_size(640, 480);
+        window.set_default_size(640, 600);
         window.search_enabled = true;
 
         const page = new Adw.PreferencesPage({
@@ -119,6 +119,16 @@ export default class TestEmailAddressesPreferences extends ExtensionPreferences 
         storageRow.add_suffix(openFolderButton);
         storageGroup.add(storageRow);
         page.add(storageGroup);
+
+        const versionGroup = new Adw.PreferencesGroup();
+        const versionLabel = new Gtk.Label({
+            label: `version ${this.metadata.version}`,
+            halign: Gtk.Align.CENTER,
+            margin_top: 24,
+        });
+        versionLabel.add_css_class('dim-label');
+        versionGroup.set_header_widget(versionLabel);
+        page.add(versionGroup);
 
         window.connect('destroy', () => {
             for (const signalId of signalIds)
