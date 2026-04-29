@@ -24,8 +24,10 @@ cp -a \
   metadata.json \
   prefs.js \
   storage.js \
-  schemas \
   "${BUILD_DIR}/"
+
+mkdir -p "${BUILD_DIR}/schemas"
+cp schemas/*.xml "${BUILD_DIR}/schemas/"
 
 rm -f "${ARCHIVE_PATH}"
 (

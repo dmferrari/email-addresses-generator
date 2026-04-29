@@ -1,12 +1,12 @@
 {
   "uuid": "test-email-addresses@dmferrari.github.io",
   "name": "Test Email Addresses",
-  "description": "Generate and copy unique test email addresses to the clipboard from the top bar.",
+  "description": "Generates unique test email addresses and copies them to the clipboard. Clipboard access is used to automatically copy generated addresses when triggered from the panel menu or a user-configured keyboard shortcut.",
   "shell-version": [
     "49",
     "50"
   ],
-  "version": "0.3.0",
+  "version": "0.3.1",
   "url": "https://github.com/dmferrari/email-addresses-generator",
   "settings-schema": "org.gnome.shell.extensions.test-email-addresses"
 }
