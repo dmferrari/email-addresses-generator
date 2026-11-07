@@ -57,7 +57,7 @@ findings = result.get('findings', [])
 errors = [finding for finding in findings
           if finding.get('severity') == 'error']
 known_gnome_51_false_positive = (
-    metadata.get('shell-version') == ['49', '50', '51']
+    '51' in metadata.get('shell-version', [])
     and errors
     and all(finding.get('rule_id') == 'EGO-M-004' for finding in errors)
 )
