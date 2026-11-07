@@ -7,7 +7,7 @@
     "50",
     "51"
   ],
-  "version-name": "0.4.1",
+  "version-name": "0.4.2",
   "url": "https://github.com/dmferrari/email-addresses-generator",
   "settings-schema": "org.gnome.shell.extensions.test-email-addresses"
 }
